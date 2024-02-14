@@ -8,7 +8,74 @@
 //     playGroundSection.classList.remove('hidden');
 // }
 
-function continueGame(){
+
+
+// part-2:
+function handleKeyboardButtonPress(event){
+    const playerPressed = event.key;
+
+    // get the expected to press
+    const currentAlphabetElement = document.getElementById('current-alphabet');
+    const targetAlphabet = currentAlphabetElement.innerText;
+    const expectedAlphabet = targetAlphabet.toLowerCase();
+
+    // check matched or not
+    if(playerPressed === expectedAlphabet){
+        console.log('you get a point');
+        const currentScoreElement = document.getElementById('current-score');
+        const currentScoreText = currentScoreElement.innerText;
+        const currentScoreNumber = parseInt(currentScoreText);
+        const newScore = currentScoreNumber + 1;
+        currentScoreElement.innerText = newScore;
+        removeBackgroundColorById(expectedAlphabet);
+        continueGame();
+    }
+    else{
+        console.log('you missed, loss a life');
+        const currentLifeScore = document.getElementById('current-life');
+        const currentLifeText = currentLifeScore.innerText;
+        const currentLifeNumber = parseInt(currentLifeText);
+        const newLife = currentLifeNumber - 1;
+        currentLifeScore.innerText = newLife;
+    }
+}
+document.addEventListener('keyup', handleKeyboardButtonPress);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// part-1:
+function continueGame() {
     // step-1: generate a random alphabet
     const alphabet = getARandomAlphabet();
     console.log(alphabet);
@@ -16,13 +83,13 @@ function continueGame(){
     // set randomly generated alphabet to the screen(show it)
     const currentAlphabetElement = document.getElementById('current-alphabet');
     currentAlphabetElement.innerText = alphabet;
-    
+
     // set key background color
     setBackgroundColorById(alphabet);
 
 }
 
-function play(){
+function play() {
     hideElementById('home-screen');
     showElementById('play-ground');
     continueGame();
